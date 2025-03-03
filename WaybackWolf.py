@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import argparse
 import asyncio
 import json
@@ -24,8 +22,31 @@ from rich.text import Text
 
 # Initialize colorama, logging, and rich console
 init()
-logging.basicConfig(filename='url_checker.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='waybackwolf.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console = Console()
+
+# Tool name and credit text with ASCII art
+TOOL_NAME = "WaybackWolf"
+CREDIT_TEXT = f"""
+[bold cyan]
+
+ __    __            _                _     __    __      _  __ 
+/ / /\ \ \__ _ _   _| |__   __ _  ___| | __/ / /\ \ \___ | |/ _|
+\ \/  \/ / _` | | | | '_ \ / _` |/ __| |/ /\ \/  \/ / _ \| | |_ 
+ \  /\  / (_| | |_| | |_) | (_| | (__|   <  \  /\  / (_) | |  _|
+  \/  \/ \__,_|\__, |_.__/ \__,_|\___|_|\_\  \/  \/ \___/|_|_|  
+               |___/                                            
+
+[/]
+[green]A fast and efficient tool for analyzing archived URLs, retrieving snapshots, and detecting sensitive data.[/]
+
+[green]Developed by: [white]AIwolfie[/]
+[green]Version: [white]1.0.0[/]
+[green]GitHub: [white]https://github.com/AIwolfie/waybackwolf[/]
+[green]License: [white]MIT[/]
+
+[yellow]----------------------------------[/]
+"""
 
 # Extensions and set for fast lookup
 EXTENSIONS = [
@@ -191,11 +212,14 @@ async def process_url(url, session, url_semaphore, wayback_semaphore, ai_choice=
     if live:
         with live:
             live.update(layout)
-            await asyncio.sleep(2)  # Display for 2 seconds
+            await asyncio.sleep(2)
 
     return cli_result, json_result
 
 async def process_urls(input_file, domain=None, output_file=None, json_file=None, max_workers=10, wayback_workers=5, ai_choice=None, ai_extensions=None, interactive=False):
+    # Display credit text with ASCII art
+    console.print(CREDIT_TEXT)
+
     urls = set()
     async for url in read_urls(input_file):
         urls.add(url)
@@ -272,8 +296,8 @@ async def process_urls(input_file, domain=None, output_file=None, json_file=None
 
 def main():
     parser = argparse.ArgumentParser(
-        description="A colorful CLI tool to analyze URLs by file extension, check their accessibility, retrieve Wayback Machine snapshots, and optionally analyze content with AI interactively.",
-        epilog="Example: python url_checker.py -i out.txt -d example.com -o results.txt -j results.json -w 20 -ww 5 --ai chatgpt --extensions .sql .json --interactive"
+        description=f"A colorful CLI tool ({TOOL_NAME}) to analyze URLs by file extension, check their accessibility, retrieve Wayback Machine snapshots, and optionally analyze content with AI interactively.",
+        epilog=f"Example: python waybackwolf.py -i out.txt -d example.com -o results.txt -j results.json -w 20 -ww 5 --ai chatgpt --extensions .sql .json --interactive"
     )
     parser.add_argument('-i', '--input', required=True, help="Path to the input file with URLs (one per line), e.g., 'out.txt'.")
     parser.add_argument('-o', '--output', help="Path to save plain text results (optional), e.g., 'results.txt'.")
