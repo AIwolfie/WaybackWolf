@@ -1,0 +1,4 @@
+{
+    "chatgpt": "your_openai_api_key",
+    "grok": "your_xai_grok_api_key"
+  }
