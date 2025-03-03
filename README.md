@@ -3,14 +3,6 @@
 **WaybackWolf** is a powerful command-line tool designed to analyze URLs by checking their accessibility, retrieving archived snapshots from the Wayback Machine, and detecting sensitive data using AI. It supports interactive mode for live content display and offers flexible configuration for both technical and security-focused users.
 
 
- __    __            _                _     __    __      _  __ 
-/ / /\ \ \__ _ _   _| |__   __ _  ___| | __/ / /\ \ \___ | |/ _|
-\ \/  \/ / _` | | | | '_ \ / _` |/ __| |/ /\ \/  \/ / _ \| | |_ 
- \  /\  / (_| | |_| | |_) | (_| | (__|   <  \  /\  / (_) | |  _|
-  \/  \/ \__,_|\__, |_.__/ \__,_|\___|_|\_\  \/  \/ \___/|_|_|  
-               |___/                                            
-
-
 ## Features
 
 - **URL Accessibility Check**: Validates if URLs are live with customizable timeouts.
